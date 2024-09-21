@@ -1,6 +1,9 @@
 # CryptoClustering
 Module 19
 
+![image](https://github.com/user-attachments/assets/ca582456-e78b-4856-8075-37bcbbfcf385)
+
+
 # CryptoClustering
 
 Using Python and unsupervised machine learning to predict if cryptocurrencies are affected by 24-hour or 7-day price changes.
