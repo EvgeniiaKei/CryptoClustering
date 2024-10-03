@@ -15,62 +15,50 @@ Use the StandardScaler() module from scikit-learn to normalize the data from the
 Create a DataFrame with the scaled data and set the "coin_id" index from the original DataFrame as the index for the new DataFrame.
 
 
+## Overview of the Analysis
 
-# Find the Best Value for k Using the Original Scaled DataFrame
+In this repository you will find how an unsupervised learning Machine Learning model was applied to cluster cryptocurrencies. The purpose of the analysis was to find the best way to cluster such currencies and to evaluate how inertia and the number of features affect the analysis.
 
-Use the elbow method to find the best value for k using the following steps:
- - Create a list with the number of k values from 1 to 11.
- - Create an empty list to store the inertia values.
- - Create a for loop to compute the inertia with each possible value of k.
- - Create a dictionary with the data to plot the elbow curve.
- - Plot a line chart with all the inertia values computed with the different values of k to visually identify the optimal value for k.
- - Answer the following question in your notebook: What is the best value for k?
+The data were prepared for the analysis, and the following method was run twice:
 
-# Cluster Cryptocurrencies with K-means Using the Original Scaled Data
+Creating a Pandas DataFrame with the data to be analysed, finding the best value for 'k', clustering the cryptocurrencies with the K-means component of Sci-kit Learn, and plotting the results with hvPlot.
+It was run twice because two different datasets were used: first, the original dataset, and second, the same dataset, but optimised with a principal compenent analysis (PCA).
 
-Use the following steps to cluster the cryptocurrencies for the best value for k on the original scaled data:
-- Initialize the K-means model with the best value for k.
-- Fit the K-means model using the original scaled DataFrame.
-- Predict the clusters to group the cryptocurrencies using the original scaled DataFrame.
-- Create a copy of the original data and add a new column with the predicted clusters.
-- Create a scatter plot using hvPlot as follows:
-   - Set the x-axis as "PC1" and the y-axis as "PC2".
-   - Color the graph points with the labels found using K-means.
-   - Add the "coin_id" column in the hover_cols parameter to identify the cryptocurrency represented by each data point.
-# Optimize Clusters with Principal Component Analysis
+# Description
+Part 1
+  - Scale the given cryptocurrency dataset with StandardScaler
+  - Find the best value for k (number of clusters) using the elbow method (Best value found: k=4)
 
-  - Using the original scaled DataFrame, perform a PCA and reduce the features to three principal components.
+    <img width="368" alt="image" src="https://github.com/user-attachments/assets/c6d936e0-266a-4fc0-94dc-775ee4e614c4">
 
-  - Retrieve the explained variance to determine how much information can be attributed to each principal component and then answer the following question in your notebook:
-      - What is the total explained variance of the three principal components?
+  - Use KMeans to cluster the scaled data (with the optimum k value found in the previous step)
 
-  - Create a new DataFrame with the PCA data and set the "coin_id" index from the original DataFrame as the index for the new DataFrame.
-       - The first five rows of the PCA DataFrame should appear as follows:
-   
+    <img width="367" alt="image" src="https://github.com/user-attachments/assets/1aaa0fb1-1acd-450b-b303-703c09a59210">
 
-# Find the Best Value for k Using the PCA Data
+Part 2
+  - Use PCA to turn the original scaled dataset into a new DataFrame with 3 components
+  - Find the best value for k (number of clusters) using the elbow method (Best value found: k=4)
 
-Use the elbow method on the PCA data to find the best value for k using the following steps:
- - Create a list with the number of k-values from 1 to 11.
- - Create an empty list to store the inertia values.
- - Create a for loop to compute the inertia with each possible value of k.
- - Create a dictionary with the data to plot the Elbow curve.
- - Plot a line chart with all the inertia values computed with the different values of k to visually identify the optimal value for k.
- - Answer the following question in your notebook:
-    - What is the best value for k when using the PCA data?
-    - Does it differ from the best k value found using the original data?
-  
-# Cluster Cryptocurrencies with K-means Using the PCA Data
+     <img width="367" alt="image" src="https://github.com/user-attachments/assets/56769152-af32-47c3-a686-0a4a9a696af7">
 
-Use the following steps to cluster the cryptocurrencies for the best value for k on the PCA data:
- - Initialize the K-means model with the best value for k.
- - Fit the K-means model using the PCA data.
- - Predict the clusters to group the cryptocurrencies using the PCA data.
- - Create a copy of the DataFrame with the PCA data and add a new column to store the predicted clusters.
- - Create a scatter plot using hvPlot as follows:
-    - Set the x-axis as "price_change_percentage_24h" and the y-axis as "price_change_percentage_7d".
-    - Color the graph points with the labels found using K-means.
-    - Add the "coin_id" column in the hover_cols parameter to identify the cryptocurrency represented by each data point.
-  - Answer the following question:
-    - What is the impact of using fewer features to cluster the data using K-Means?
-   
+  - Use KMeans to cluster the scaled data (with the optimum k value found in the previous step)
+
+     <img width="355" alt="image" src="https://github.com/user-attachments/assets/ab100eb7-dada-4b0f-8bb2-7d79e6eed1fc">
+
+ 
+# Q&As
+As you will see in the Jupyter Notebook within this repository, the following 5 questions were answered as the analysis was conducted:
+
+ 1. What is the best value for k?
+    Answer: Based on the elbow curve graph, k=4 seems to be the best choice to start the analysis.
+ 2. What is the total explained variance of the three principal components?
+    Answer: 89.4% is the total explained variance using just these 3 components. i.e., We dropped 10.6% of the variability by dropping 4 of the 7 components.
+ 3. What is the best value for k when using the PCA data?
+    Answer: 4
+ 4. Does it differ from the best k value found using the original data?
+    Answer: Both data show 4
+ 5. What is the impact of using fewer features to cluster the data using K-Means?
+    Answer: The inertia decreased and the data points seem to be less dispersed. Having fewer features to cluster the data seems to reduce ambiguity, which leads to a better interpretation of the results. The best value for k is the same in both cases. The impact of using fewer features to cluster the data produces tighter clusters.
+
+
+
